@@ -1,0 +1,43 @@
+<%# to put the columns in the middle we can either use
+justify-content-center INSIDE THE ROW 
+know that bootstrap rows are flexbox by default
+meaning => can use flexbox classes for example without having to add a d-flex class
+OR 
+offset-sm-2 INSIDE THE COLUMN %>
+
+<%# ABOUT OFFSETTING COLUMNS:
+These classes increase the left margin of a column by a certains number of columns.
+For example, .offset-sm-2 moves that we are using here will move .col-sm-2 over two columns. %>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+
+    <%# ============== FORM GOES HERE ============= %>
+    <div class="mb-4">
+    <%# so once we hit seacrch here, we will stay o the index page
+    and the number of results will be the resut of our query %>
+    <%= form_tag movies_path, method: :get do %>
+    <%# query=superman&commit=Search - query here is the name of the input%>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a movie"
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary mt-2" %>
+    <% end %>
+    </div>
+    <%# AFTER ADDING MTS AND TALKING ABOUT THE FORMS STRUCTUTE GO BACK TO SCRIPT %>
+    <%# ============== FORM ENDS HERE ============= %>
+      <div id="movies">
+        <% @results.each do |result| %>
+          <%# if result.director_id %>
+            <%# <p>Movie by = result.director.last_name</p> %>
+          <%# end %>
+          <h4><%= result.searchable.title %></h4>
+          <p><%= result.searchable.synopsis %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
